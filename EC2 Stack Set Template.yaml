@@ -1,0 +1,25 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Description: EC2 Stack Set
+
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    Description: EC2 instance type
+
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      ImageId: ami-08333bccc35d71140  # Specify the desired AMI ID
+      KeyName: ohio_key
+      SecurityGroupIds:
+        - sg-0a3afd289e77d3e0e  # Specify the desired security group ID
+      SubnetId: subnet-02d5a36443cdfccaf  # Specify the desired subnet ID
+
+Outputs:
+  EC2Instance:
+    Description: EC2 instance created by the stack
+    Value: !Ref EC2Instance
