@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: EC2 Stack Set
+
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    Description: EC2 instance type
+
+Resources:
+  EC2InstanceUSEast2:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      ImageId: ami-08333bccc35d71140
+      KeyName: ohio_key
+      SecurityGroupIds:
+        - sg-041dcbdf0ae9258bd
+      SubnetId: subnet-0821314892b8ac655
+    Region: us-east-2
+
+  EC2InstanceUSWest1:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      ImageId: ami-051ed863837a0b1b6
+      KeyName: cal
+      SecurityGroupIds:
+        - sg-0c45543a2b634d405
+      SubnetId: subnet-011a412d996c19fbb
+    Region: us-west-1
+
+Outputs:
+  EC2InstanceUSEast2:
+    Description: EC2 instance created in us-east-2
+    Value: !Ref EC2InstanceUSWest2
+
+  EC2InstanceUSWest1:
+    Description: EC2 instance created in us-west-1
+    Value: !Ref EC2InstanceEUWest1
