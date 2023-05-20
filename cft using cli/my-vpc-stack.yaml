@@ -31,7 +31,8 @@ Resources:
       Tags:
         - Key: Name
           Value: MySubnet
-
+      MapPublicIpOnLaunch: true  # Enable auto-assign public IP
+      
   RouteTable:
     Type: AWS::EC2::RouteTable
     Properties:

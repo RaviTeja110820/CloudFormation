@@ -16,8 +16,8 @@ Resources:
       ImageId: ami-08333bccc35d71140  # Specify the desired AMI ID
       KeyName: ohio_key
       SecurityGroupIds:
-        - sg-05b09f26ac04da63d  # Specify the desired security group ID
-      SubnetId: subnet-05e9bb71c97ad3275  # Specify the desired subnet ID
+        - sg-017c37c2afabf1f8a  # Specify the desired security group ID
+      SubnetId: subnet-0fdd4bf2a103628f5  # Specify the desired subnet ID
       Tags:
         - Key: Name
           Value: MyInstance1
