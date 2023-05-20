@@ -4,9 +4,18 @@ Resources:
     Type: AWS::EC2::VPC
     Properties:
       CidrBlock: 10.0.0.0/16
+      Tags:
+        - Key: Name
+          Value: MyVPC
+      
 
   InternetGateway:
     Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: MyInternetGateway
+
 
   VPCGatewayAttachment:
     Type: AWS::EC2::VPCGatewayAttachment
@@ -19,11 +28,17 @@ Resources:
     Properties:
       VpcId: !Ref VPC
       CidrBlock: 10.0.0.0/24
+      Tags:
+        - Key: Name
+          Value: MySubnet
 
   RouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: MyRouteTable
 
   DefaultRoute:
     Type: AWS::EC2::Route
@@ -45,6 +60,9 @@ Resources:
       GroupName: my-security-group
       GroupDescription: My security group (insert description as comment)
       VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: MySecurityGroup
 
   SecurityGroupIngress:
     Type: AWS::EC2::SecurityGroupIngress
