@@ -1,0 +1,56 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Description: RDS Instance
+
+Parameters:
+  DBInstanceIdentifier:
+    Type: String
+    Description: Unique identifier for the RDS instance
+  DBName:
+    Type: String
+    Description: Name of the database
+  Engine:
+    Type: String
+    Description: Database engine (e.g., mysql, postgresql)
+  EngineVersion:
+    Type: String
+    Description: Engine version (e.g., 8.0.20)
+  MasterUsername:
+    Type: String
+    Description: Username for the master DB user
+  MasterUserPassword:
+    Type: String
+    Description: Password for the master DB user
+    NoEcho: true
+    Default: YourDefaultPassword
+  AllocatedStorage:
+    Type: Number
+    Description: Storage size (in GB)
+    Default: 10
+  DBInstanceClass:
+    Type: String
+    Description: RDS instance type
+    Default: db.t2.micro
+  MultiAZ:
+    Type: String
+    Description: Enable Multi-AZ deployment (true/false)
+    Default: false
+
+Resources:
+  DBInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: !Ref DBInstanceIdentifier
+      DBName: !Ref DBName
+      Engine: !Ref Engine
+      EngineVersion: !Ref EngineVersion
+      MasterUsername: !Ref MasterUsername
+      MasterUserPassword: !Ref MasterUserPassword
+      AllocatedStorage: !Ref AllocatedStorage
+      DBInstanceClass: !Ref DBInstanceClass
+      MultiAZ: !Ref MultiAZ
+
+Outputs:
+  DBInstanceEndpoint:
+    Description: Endpoint of the RDS instance
+    Value: !Sub ${DBInstance.Endpoint.Address}:${DBInstance.Endpoint.Port}
