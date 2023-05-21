@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: RDS Replica Instance
+
+Parameters:
+  SourceDBInstanceIdentifier:
+    Type: String
+    Description: ARN of the source RDS instance
+  ReplicaDBInstanceIdentifier:
+    Type: String
+    Description: Unique identifier for the replica RDS instance
+
+Resources:
+  DBInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: !Ref ReplicaDBInstanceIdentifier
+      SourceDBInstanceIdentifier: !Ref SourceDBInstanceIdentifier
+      PubliclyAccessible: true
+
+Outputs:
+  DBInstanceEndpoint:
+    Description: Endpoint of the replica RDS instance
+    Value: !Sub ${DBInstance.Endpoint.Address}:${DBInstance.Endpoint.Port}
